@@ -12,15 +12,15 @@ typeset -g ZSH_ASK_VERSION=$(<"$ZSH_ASK_PATH"/VERSION)
 
 
 (( ! ${+ZSH_ASK_REPO} )) &&
-typeset -g ZSH_ASK_REPO="Michaelwmx/zsh-ask"
+typeset -g ZSH_ASK_REPO="pauldatta/zsh-ask-azure-openai/"
 
 # Get the corresponding endpoint for your desired model.
 (( ! ${+ZSH_ASK_API_URL} )) &&
-typeset -g ZSH_ASK_API_URL="https://api.openai.com/v1/chat/completions"
+typeset -g ZSH_ASK_API_URL="https://neuralnexus.openai.azure.com/openai/deployments/MilestonePaul/chat/completions?api-version=2023-03-15-preview"
 
-# Fill up your OpenAI api key here.
+# Add your your AOI Service api key here.
 (( ! ${+ZSH_ASK_API_KEY} )) &&
-typeset -g ZSH_ASK_API_KEY="sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+typeset -g ZSH_ASK_API_KEY="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 
 # Default configurations
 (( ! ${+ZSH_ASK_CONVERSATION} )) &&
@@ -91,7 +91,7 @@ function ask() {
     local api_url=$ZSH_ASK_API_URL
     local api_key=$ZSH_ASK_API_KEY
     local conversation=$ZSH_ASK_CONVERSATION
-    local makrdown=$ZSH_ASK_MARKDOWN
+    local markdown=$ZSH_ASK_MARKDOWN
     local stream=$ZSH_ASK_STREAM
     local tokens=$ZSH_ASK_TOKENS
     local inherits=$ZSH_ASK_INHERITS
@@ -163,7 +163,7 @@ function ask() {
                 fi
                 ;;
             m)
-                makrdown=true
+                markdown=true
                 if ! which "glow" > /dev/null; then
                     echo "glow is required for markdown rendering."
                     satisfied=false
@@ -223,7 +223,7 @@ function ask() {
         if $stream; then
             local begin=true
             local token=""
-            curl -s -X POST -H "Content-Type: application/json" -H "Authorization: Bearer $api_key" -d $data $api_url | while read token; do
+            curl -s -X POST -H "Content-Type: application/json" -H "api-key: $api_key" -d $data $api_url | while read token; do
                 if [ "$token" = "" ]; then
                     continue
                 fi
@@ -255,13 +255,19 @@ function ask() {
             done
             message='{"role":"assistant", "content":"'"$generated_text"'"}'
         else
-            local response=$(curl -s -X POST -H "Content-Type: application/json" -H "Authorization: Bearer $api_key" -d $data $api_url)
+            local response=$(curl -s -X POST -H "Content-Type: application/json" -H "api-key: $api_key" -d $data $api_url)
             if $debug; then
                 echo -E "$response"
             fi
-            message=$(echo -E $response | jq -r '.choices[].message');  
-            generated_text=$(echo -E $message | jq -r '.content')
-            if $makrdown; then
+            message=$(echo -E $response | jq -r '.choices[].message' 2>/dev/null)
+
+            if [ $? -ne 0 ]; then
+                generated_text=$(echo -E $response | jq -r '.error.message')
+            else
+                generated_text=$(echo -E $message | jq -r '.content')
+            fi
+
+            if $markdown; then
                 echo $generated_text | glow
             else
                 echo $generated_text

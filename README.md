@@ -2,11 +2,33 @@
 
 A lightweight Zsh plugin serves as a ChatGPT API frontend, enabling you to interact with ChatGPT directly from the `Zsh` shell using only `cURL` and `jq`.
 
+![Screenshot 0.0.2-beta.png](screenshots/0.0.2-beta.png)
+
+## Changelog
+
+- **Version 0.0.2-beta:**
+  - Works with Azure Open AI Service
+  - Added error handling for AOI Rate limiting or parsing errors
+  - Improved Readme/Install instructions
+
 ## Installation
 
 See [INSTALL.md](INSTALL.md).
 
-## Preliminaries
+## Pre-requisites
+
+Please ensure you have the following:
+
+- An Azure Open AI service account with a deployed GPT-3.5 model.
+- The OpenAI Key and OpenAI URL for your Azure Open AI service deployment.
+
+If you haven't set up an Azure Open AI service account and deployed the GPT-3.5 model, follow these steps:
+
+1. Sign in to the Azure portal at [https://portal.azure.com](https://portal.azure.com).
+2. Create a new Azure Open AI resource. Learn how to create an Azure Open AI resource with this [Microsoft Learn guide](https://docs.microsoft.com/learn/modules/get-started-with-azure-ai-text-api/).
+3. Follow the instructions to deploy the GPT-3.5 model within your Azure Open AI service. Refer to the [Microsoft Learn guide](https://docs.microsoft.com/learn/modules/deploy-language-model-with-text-api/) for detailed steps on deploying the GPT-3.5 model.
+
+Retrieve the OpenAI Key and OpenAI URL from your Azure Open AI service account.
 
 Make sure you have [`cURL`](https://curl.se/) and [`jq`](https://stedolan.github.io/jq/) installed.
 
@@ -14,13 +36,11 @@ If you would like to have markdown rendering with option `-m`, [`glow`](https://
 
 ## Usage
 
-Fill your OpenAI api key as `ZSH_ASK_API_KEY` (See [INSTALL.md](INSTALL.md) for detail information), then just run
-
 ```bash
 ask '<what you about to ask>'
 ```
 
-Use `-c` for dialogue format communication.
+Use `-c` for dialogue format communication (BETA)
 
 ```bash
 ask -c
@@ -38,4 +58,8 @@ Use `-h` for more information.
 ask -h
 ```
 
-Have fun!
+Use `-d` to turn on debug mode.
+
+```bash
+ask -d
+```
