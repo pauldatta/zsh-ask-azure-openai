@@ -30,6 +30,20 @@ If you haven't set up an Azure Open AI service account and deployed the GPT-3.5 
 
 Retrieve the OpenAI Key and OpenAI URL from your Azure Open AI service account.
 
+Install zsh shell if you haven't already:
+    
+```bash
+sudo apt install zsh
+```
+
+Set it as your default shell: (optional)
+    
+```bash
+chsh -s $(which zsh)
+```
+
+You can also install [oh-my-zsh](https://ohmyz.sh/#install) if you want to.
+
 Make sure you have [`cURL`](https://curl.se/) and [`jq`](https://stedolan.github.io/jq/) installed.
 
 If you would like to have markdown rendering with option `-m`, [`glow`](https://github.com/charmbracelet/glow) is required (Recommend).
