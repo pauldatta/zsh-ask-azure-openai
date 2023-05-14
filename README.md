@@ -14,7 +14,11 @@ A lightweight Zsh plugin serves as a ChatGPT API frontend, enabling you to inter
 ## Installation
 
 See [INSTALL.md](INSTALL.md).
+or
 
+```bash
+./install.sh
+```
 ## Pre-requisites
 
 Please ensure you have the following:
