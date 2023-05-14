@@ -1,6 +1,6 @@
-# zsh-ask
+# zsh-ask-azure-openai
 
-A lightweight Zsh plugin serves as a ChatGPT API frontend, enabling you to interact with ChatGPT directly from the `Zsh` shell using only `cURL` and `jq`.
+A lightweight Zsh plugin that serves as a ChatGPT API frontend, enabling you to interact with ChatGPT directly from the `Zsh` shell using only `cURL` and `jq`.
 
 ![Screenshot 0.0.2-beta.png](images/0.0.2-beta.png) ![Screenshot ask-code](images/ask-code.png)
 
@@ -17,7 +17,7 @@ See [INSTALL.md](INSTALL.md).
 or
 
 ```bash
-./install.sh
+sh ./install.sh
 ```
 ## Pre-requisites
 
@@ -37,7 +37,7 @@ Retrieve the OpenAI Key and OpenAI URL from your Azure Open AI service account.
 Install zsh shell if you haven't already:
     
 ```bash
-sudo apt install zsh
+sudo apt-get install zsh
 ```
 
 Set it as your default shell: (optional)
