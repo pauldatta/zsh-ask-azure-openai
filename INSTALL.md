@@ -14,7 +14,7 @@ If you would like to have markdown rendering with option `-m`, [`glow`](https://
    ```shell
    export ZSH_ASK_API_URL="<Deployment URL>"
    export ZSH_ASK_API_KEY="<Deployment Key>"
-   export ZSH_ASK_MARKDOWN=true # Optional
+   export ZSH_ASK_MARKDOWN=true # Recommended
    source $HOME/.zsh/zsh-ask/zsh-ask.zsh
    ```
 3. Start a new terminal session.
