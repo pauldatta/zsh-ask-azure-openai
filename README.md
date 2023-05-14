@@ -2,7 +2,7 @@
 
 A lightweight Zsh plugin serves as a ChatGPT API frontend, enabling you to interact with ChatGPT directly from the `Zsh` shell using only `cURL` and `jq`.
 
-![Screenshot 0.0.2-beta.png](screenshots/0.0.2-beta.png)
+![Screenshot 0.0.2-beta.png](images/0.0.2-beta.png) ![Screenshot ask-code](images/ask-code.png)
 
 ## Changelog
 
@@ -37,7 +37,7 @@ If you would like to have markdown rendering with option `-m`, [`glow`](https://
 ## Usage
 
 ```bash
-ask '<what you about to ask>'
+ask '<your prompt>'
 ```
 
 Use `-c` for dialogue format communication (BETA)
